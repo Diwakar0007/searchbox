@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SearchBar from "material-ui-search-bar";
 
 const SearchBox = () => {
   // state
@@ -18,20 +19,30 @@ const SearchBox = () => {
     fetchNews();
   }, [url]);
 
-  const handleChange = (e) => {
-    setSearchQuery(e.target.value);
+  const handleChange = (value) => {
+    setSearchQuery(value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onRequestSearch = (searchQuery) => {
     setUrl(`https://hn.algolia.com/api/v1/search?query=${searchQuery}`);
   };
 
   const searchForm = () => (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={searchQuery} onChange={handleChange} />
-      <button>Search</button>
-    </form>
+    // <form onSubmit={handleSubmit}>
+    //   <input type="text" value={searchQuery} onChange={handleChange} />
+    //   <button>
+    //     <SearchIcon />
+    //   </button>
+    // </form>
+
+    <SearchBar
+      onChange={(newValue) => handleChange(newValue)}
+      onRequestSearch={() => onRequestSearch(searchQuery)}
+      style={{
+        margin: "10px auto",
+        maxWidth: 400,
+      }}
+    />
   );
 
   const showNews = () => news.map((n, i) => <p key={i}>{n.title}</p>);
