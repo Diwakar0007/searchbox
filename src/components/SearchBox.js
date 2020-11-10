@@ -38,6 +38,8 @@ const SearchBox = () => {
     <SearchBar
       onChange={(newValue) => handleChange(newValue)}
       onRequestSearch={() => onRequestSearch(searchQuery)}
+      placeholder="Search any technology..."
+      autoFocus
       style={{
         margin: "10px auto",
         maxWidth: 400,
